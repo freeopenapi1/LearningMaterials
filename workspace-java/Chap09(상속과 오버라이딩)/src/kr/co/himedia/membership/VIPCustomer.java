@@ -12,7 +12,14 @@ public class VIPCustomer extends Customer {
 	double salesRatio;
 	
 	public VIPCustomer() {
-		super();
+		//super();
+		this.customerGrade = "VIP";
+		this.bonusRatio = 0.05;
+		this.salesRatio = 0.1;
+	}
+	
+	public VIPCustomer(int customerId, String customerName) {
+		super(customerId, customerName);
 		this.customerGrade = "VIP";
 		this.bonusRatio = 0.05;
 		this.salesRatio = 0.1;
@@ -21,4 +28,44 @@ public class VIPCustomer extends Customer {
 	public int getAgentId() {
 		return agentId;
 	}
+	
+	@Override
+	public int calcPrice(int price) {
+		bonusPoint += price * bonusRatio;
+		return price - (int)(price * salesRatio);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
