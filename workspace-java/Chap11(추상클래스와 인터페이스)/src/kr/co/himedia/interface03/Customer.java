@@ -4,13 +4,13 @@ public class Customer implements Buy, Sell {
 
 	@Override
 	public void sell() {
-		// TODO Auto-generated method stub
+		System.out.println("Customer sell");
 		
 	}
 
 	@Override
 	public void buy() {
-		// TODO Auto-generated method stub
+		System.out.println("Customer buy");
 		
 	}
 	
@@ -18,5 +18,25 @@ public class Customer implements Buy, Sell {
 	public void order() {
 		System.out.println("customer order!");
 	}
+	
+	public void sayHello() {
+		System.out.println("Hello world!");
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
