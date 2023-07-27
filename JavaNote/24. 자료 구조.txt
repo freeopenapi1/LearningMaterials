@@ -27,4 +27,11 @@
             - 정점(vertex)과 간선(edge)들의 유한 집합
         - 해싱 (Hashing)
             - 자료를 검색하기 위한 자료 구조  
-            - HashMap, Properties                            
+            - HashMap, Properties   
+
+    3) 트리 (Tree)
+        - 이진 트리 (binary tree)
+            - 부모노드에 자식노드가 두 개 이하인 트리     
+        - 자료의 중복을 허용하지 않음
+        - 왼쪽 자식 노드는 부모 노드보다 작은 값,
+          오른쪽 자식 노드는 부모 노드보다 큰 값을 가짐.                                                 

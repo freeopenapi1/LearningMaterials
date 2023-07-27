@@ -1,0 +1,40 @@
+1. Wrapper(포장) 클래스 
+    1) 기본 데이터 타입(primitive type)을 객체로 다룰 수 있도록 
+       만들어진 클래스임.
+    2) Wrapper 클래스를 사용하면 자동으로 박싱(boxing)과 언박싱(unboxing)이
+       이루어짐 
+
+    3) 기본 데이터 타입                     Wrapper 클래스 
+      ----------------------------------------------------
+        byte                                Byte 
+        short                               Short 
+        int                                 Integer
+        long                                Long 
+        float                               Float 
+        double                              Double 
+        char                                Character
+        boolean                             Boolean 
+  
+    4) Boxing             
+        - 기본 데이터 타입을 해당하는 Wrapper 클래스 객체로 변환하는 것 
+        - 예)
+            int i = 10;
+            Integer intObj = Integer.valueOf(i)
+
+       Unboxing 
+        - Wrapper 클래스 객체를 해당하는 기본 데이터 타입으로 변환하는 것 
+        - 예) 
+            Integer intObj = new Integer(10);
+            int i = intObj.intValue(); 
+
+    5) Auto-Boxing
+        - 기본 데이터 타입의 값을 해당하는 Wrapper 클래스 객체로 변환하는 것 
+        - 예)
+            int i = 10;                               
+            Integer intObj = i;
+
+       Auto-Unboxing
+        - Wrapper 클래스 객체를 해당하는 기본 데이터 타입으로 자동 변환하는 것
+        - 예)              
+            Integer intObj = new Integer(10);
+            int i = intObj;
