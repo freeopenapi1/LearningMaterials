@@ -1,0 +1,93 @@
+1. 입출력 스트림 
+    1) 네트워크에서 자료의 흐름이 물의 흐름과 같다는 비유에서 유래됨 
+    2) 자바는 다양한 입출력 장치에 독립적으로 일관성있는 입출력 스트림을 통해 제공 
+    3) 입출력이 구현되는 곳
+        - 파일 디스크, 키보드, 마우스, 네트웍, 메모리 등 
+          모든 자료가 입력되고 출력되는 곳 
+
+2. 입출력 스트림의 구분 
+    1) 대상 기준
+        - 입력 스트림 
+            - 대상으로부터 자료를 읽어 들이는 스트림 
+            - 예) FileInputStream, FileReader, 
+                  BufferedInputStream, BufferedReader
+        - 출력 스트림 
+            - 대상으로 자료를 출력하는 스트림 
+            - 예) FileOutputStream, FileWriter, 
+                  BufferedOutputStream, BufferedWriter  
+    2) 자료의 종류 기준 
+        - 바이트 스트림 
+            - 동영상, 음악 파일, 실행 파일등의 자료를 읽고 쓸때 이용
+            - 예) FileInputStream, FileOutputStream, 
+                  BufferedInputStream, BufferedOutputStream
+        - 문자 스트림 
+            - 바이트 단위로 자료를 처리하면 문자는 깨짐.
+            - 인코딩에 맞게 2바이트 이상으로 처리하도록 구현된 스트림 
+            - 예) FileReader, FileWriter, 
+                  BufferedReader, BufferedWriter 
+
+    3) 기능 기준
+        - 기반 스트림 
+            - 대상에 직접 자료를 읽고 쓰는 기능의 스트림 
+            - 예) FileInputStream, FileOutputStream,
+                  FileReader, FileWriter
+               
+        - 보조 스트림 
+            - 직접 읽고 쓰는 기능은 없이 추가적인 기능을 더해주는 스트림
+            - 예) BufferedInputStream, BufferedOutputStream,
+                  InputStreamReader, OutputStreamWriter
+
+        - 기반 스트림 + 보조 스트림A + 보조 스트림B     
+            - 보조 스트림은 직접 읽고 쓰는 기능은 없으므로 
+              항상 기반 스트림이나 또 다른 보조 스트림을 
+              생성자의 매개변수로 포함함  
+
+3. 표준 입출력 스트림 
+    1) System 클래스의 멤버 
+        - System.out 
+            - 표준 출력(모니터) 스트림               
+        - System.in 
+            - 표준 입력(키보드) 스트림     
+        - System.err
+            - 표준 에러 출력(모니터) 스트림
+
+4. 바이트 단위 입출력 스트림 
+    1) InputStream
+        - 바이트 단위 입력 스트림 최상위 추상 클래스 
+        - 하위 스트림이 상속받아 구현함 
+        - 예) FileInputStream : 파일에서 바이트 단위로 자료를 읽음
+              ByteArrayInputStream : byte 배열 메모리에서 바이트 단위로 자료를 읽음
+              FilterInputStream : 기반 스트림에서 자료를 읽을 때
+                                  추가 기능을 제공하는 보조 스트림의 상위 클래스
+        - 주요 메서드 
+            - int read() : 입력 스트림으로부터 한 바이트의 자료를 읽음.
+                           읽은 자료의 바이트 수를 반환함  
+            - int read(byte[] b) : 입력 스트림으로부터 b[] 크기의 자료를
+                                   b[]에 읽음.
+                                   읽은 자료의 바이트 수를 반환함  
+            - int read(byte[] b, int off, int len)
+                                 : 입력 스트림으로부터 b[] 크기의 자료를                                       
+                                   b[]의 off변수 위치부터 저장하며 
+                                   len 만큼 읽음. 
+                                   읽은 자료의 바이트 수를 반환함           
+            - void close() : 입력 스트림과 연결된 대상 리소스를 닫음     
+
+    2) OutputStream
+        - 바이트 단위 출력 스트림 최상위 추상 클래스 
+        - 하위 스트림이 상속받아 구현함 
+        - 예) FileOutputStream : 파일에서 바이트 단위로 자료를 씀
+              ByteArrayOutputStream : byte 배열 메모리에서 바이트 단위로 자료를 씀
+              FilterOutputStream : 기반 스트림에서 자료를 쓸 때
+                                  추가 기능을 제공하는 보조 스트림의 상위 클래스
+
+        - 주요 메서드 
+            - void write(int b) : 한 바이트씩 출력함
+            - void write(byte[] b) : b[] 크기의 자료를 출력함 
+            - void write(byte[] b, int off, int len) 
+                                   : b[] 크기의 자료를 off 위치부터 len 개수만큼
+                                     자료를 출력함.
+            - void flush() : 출력을 위해 잠시 자료가 머무리는 출력 버퍼를
+                             강제로 비워 자료를 출력함 
+            - void close() : 출력 스트림과 연결된 대상 리소스를 닫음.
+                             출력 버퍼가 비워짐.                                                                 
+
