@@ -1,0 +1,122 @@
+1. Thread 
+    1) process 
+        - 실행 중인 프로그램 
+        - 프로그램이 실행되면 OS로 부터 메모리를 할당받아 프로세스 상태가 됨
+    2) thread 
+        - 하나의 프로세스는 하나 이상의 thread를 가지게 됨.
+        - 실제 작업(task)을 수행하는 단위는 thread임.      
+
+    3) Thread 만들기 
+        - Thread 클래스 상속하여 만들기 
+        - Runnable 인터페이스 구현하여 만들기 
+            - 자바는 다중 상속 허용되지 않으므로 
+              이미 다른 클래스를 상속한 경우 thread를 만들기 위해 
+              Runnable interface를 구현하도록 함.
+
+    4) Thread Status
+
+
+                     Run 
+                     -------
+                      thread  
+                        /|\
+                         |
+                         | CPU 스케줄링
+                         |                  sleep(시간)
+                         |                  join()
+                         |                  wait()
+    start  =======>  Runnable             ==================>         Not Runnable                      
+                    --------------------  <==================       ---------------------
+                     thread     thread      sleep(시간) -> 시간지나면  thread  thread
+                       thread     thread                              thread thread 
+                      thread     thread     join() -> other thread exits
+                    --------------------    wait() -> notify(), notifyAll()
+                        |
+                        |
+                        | thread 종료 
+                       \|/
+                       Dead 
+
+
+2. Thread 클래스의 메서드들 
+    1) Thread.MIN_PRIORITY(=1) ~ Thread.MAX_PRIORITY(=10)
+    2) 디폴트 우선순위 : Thread.NORM_PRIORITY(=5)
+    3) 우선 순위가 높은 Thread가 CPU의 배분율 받을 확률이 높음
+    4) setPriority(int newPriority) / getPriority()
+
+    5) join()
+        - 동시에 두 개 이상의 Thread가 실행 될 때 
+          다른 Thread의 결과를 참조하여 실행해야 하는 경우 join() 메서드를 사용함
+        - join() 메서드를 호출한 Thread가 Not Runnable 상태가 됨
+        - 다른 Thread가 수행이 끝나면 Runnable 상태로 돌아옴 
+
+                Thread1                         Thread2
+                  |                                 |
+                  | thread         join()           |
+                  |---------------------------------\
+                                                    /         
+                                                    |
+                                                    |
+                                                    |
+                                                   \|/ 
+                                                   Dead 
+                  |
+                  |
+                 \|/  
+
+    6) Thread 종료하기 
+        - 무한 루프의 경우 while(flag)의 flag 변수값을 false로 바꾸어 종료를 시킴   
+
+3. Multi-threading         
+    
+    1) 여러 thread가 동시에 수행되는 프로그래밍, 
+       여러 작업이 동시에 실행되는 효과.
+    2) thread는 각각 자신만의 작업 공간을 가짐 (context)               
+    3) 각 thread 사이에서 공유하는 자원이 있을 수 있음
+        - static
+    4) 여러 thread가 자원을 공유하여 작업이 수행되는 경우 
+       서로 자원을 차지하려는 race condition이 발생할수 있음.  
+    5) 이렇게 여러 thread가 공유하는 자원 중 경쟁이 발생하는 부분을
+       critical section이라고 함. 
+    6) critical section에 대한 동기화를 구현하지 않으면 오류가 발생할 수 있음  
+        - 동기화 : 일종의 순차적 수행                    
+
+4. Multi-thread 프로그래밍의 동기화
+    1) critical section은 두개 이상의 thread가 동시에 접근하는 경우
+       문제가 생길 수 있기 때문에 동시에 접근할 수 없는 영역처리
+    2) 한 순간 오직 하나의 thread가 접근하고, 나머지 thread는 대기(blocking) 
+       상태가 됨  
+
+    3) 동기화 (synchronization)       
+        - 두 개의 thread가 같은 객체에 접근 할 경우, 동시에 접근 함으로써 
+          오류가 발생함
+        - 동기화는  critical section(임계 영역)에 접근할 경우
+          공유 자원을 lock하여 다른 thread의 접근을 제어 
+        - 동기화를 잘못 구현하여 deadlock에 빠질 수 있음.
+
+    4) 자바에서의 동기화 방법
+        - synchronized 블록
+            - 현재 객체 또는 다른 객체를 lock으로 만듦
+
+            synchronized(참조형 수식) {
+                수행문;                    
+            }         
+
+        - synchronized 메서드     
+            - 객체의 메서드에 synchronized 키워드 사용 
+            - 현재 이 메서드가 속해있는 객체에 lock을 걸음.                          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
